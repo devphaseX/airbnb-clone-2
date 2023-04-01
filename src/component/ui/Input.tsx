@@ -82,23 +82,4 @@ const Input = <T extends FieldValues>({
   </div>
 );
 
-/* 
-peer-focus: -translate-y-4
-
-  absolute
-         text-md
-         duration-150
-         transform
-         z-10
-         origin-[0]
-     
-         ${formatPice ? 'left-9' : 'left-4'}
-         peer-placeholder-shown:scale-100
-         peer-placeholder-shown:translate-y-0 !important
-         peer-focus:scale-75 -translate-y-4 !important
-         
-         ${
-           errors[name as keyof FieldErrors] ? 'text-rose-500' : 'text-zinc-400'
-         }*/
-
 export { Input };
