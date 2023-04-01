@@ -1,18 +1,18 @@
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { BiDollar } from 'react-icons/bi';
 
-interface InputProps<T extends FieldValues> {
-  name: keyof T;
+interface InputProps {
+  name: keyof FieldValues;
   label: string;
   type?: string;
   disabled?: boolean;
   required?: boolean;
   formatPice?: boolean;
-  register: UseFormRegister<T>;
+  register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
 }
 
-const Input = <T extends FieldValues>({
+const Input: React.FC<InputProps> = ({
   name,
   label,
   type,
@@ -21,7 +21,7 @@ const Input = <T extends FieldValues>({
   formatPice,
   register,
   errors,
-}: InputProps<T>): React.ReactElement => (
+}: InputProps) => (
   <div
     className="
     w-full
@@ -32,7 +32,7 @@ const Input = <T extends FieldValues>({
       <BiDollar size={24} className="text-neutral-700 absolute top-5 left-2" />
     )}
     <input
-      id={name as string}
+      id={name}
       disabled={disabled}
       {...register(name as any, { required })}
       placeholder=" "
@@ -50,16 +50,8 @@ const Input = <T extends FieldValues>({
       disabled:opacity-70
       disabled:cursor-not-allowed
       ${formatPice ? 'pl-9' : 'pl-4'}
-      ${
-        errors[name as keyof FieldErrors]
-          ? 'border-rose-500'
-          : 'border-neutral-300'
-      }
-      ${
-        errors[name as keyof FieldErrors]
-          ? 'focus:border-rose-500'
-          : 'focus:border-black'
-      }
+      ${errors[name] ? 'border-rose-500' : 'border-neutral-300'}
+      ${errors[name] ? 'focus:border-rose-500' : 'focus:border-black'}
       `}
     />
     <label
