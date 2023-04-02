@@ -1,10 +1,10 @@
 'use client';
 
-import { useLayoutEffect } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { Button } from '../ui/Button';
+import { useEffect } from 'react';
 
 interface ModalProps {
   isOpen?: boolean;
@@ -32,8 +32,8 @@ const Modal: React.FC<ModalProps> = ({
   secondaryLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
-  console.log({ disabled });
-  useLayoutEffect(() => {
+
+  useEffect(() => {
     setShowModal(isOpen);
   }, [isOpen]);
 

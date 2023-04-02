@@ -3,11 +3,13 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { useState } from 'react';
 import { Avatar } from '../ui/index';
 import { MenuItem } from './MenuItem';
-import { useRegister } from '@/hooks/useRegisterHook';
+import { useRegisterModal } from '@/hooks/useRegisterHook';
+import { useLoginModal } from '@/hooks';
 
 const UserMenu = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const registerModal = useRegister();
+  const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
 
   return (
     <div className="relative">
@@ -74,8 +76,8 @@ const UserMenu = () => {
     cursor-pointer"
           >
             <>
-              <MenuItem onClick={() => {}} label="Login" />
-              <MenuItem onClick={registerModal.onOpen} label="Sign up" />
+              <MenuItem onClick={loginModal.open} label="Login" />
+              <MenuItem onClick={registerModal.open} label="Sign up" />
             </>
           </div>
         </div>
