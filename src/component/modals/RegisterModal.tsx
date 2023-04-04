@@ -1,5 +1,4 @@
 'use client';
-
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
@@ -16,7 +15,7 @@ import { Input } from '../ui';
 import { toast } from 'react-hot-toast';
 import { Button } from '../ui/Button';
 import { signIn } from 'next-auth/react';
-import { useLoginModal } from '@/hooks';
+import { useLoginModal, useProfile } from '@/hooks';
 
 interface RegisterFieldValues extends FieldValues {
   name: string;
@@ -49,7 +48,10 @@ const RegisterModal: React.FC = () => {
       });
 
       if (response.ok) {
+        toast.success('Registration successful');
         registerModal.close();
+      } else {
+        toast.error('Something went wrong while logging. Try again later?');
       }
     } catch (e) {
       toast.error((e as { message?: string })?.message ?? `${e}`);

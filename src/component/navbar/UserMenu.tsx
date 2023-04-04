@@ -4,18 +4,19 @@ import { useState } from 'react';
 import { Avatar } from '../ui/index';
 import { MenuItem } from './MenuItem';
 import { useRegisterModal } from '@/hooks/useRegisterHook';
-import { useLoginModal } from '@/hooks';
+import { useLoginModal, useProfile } from '@/hooks';
 
 const UserMenu = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const profile = useProfile();
 
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+      
           className="
         hidden
         md:block
@@ -51,7 +52,7 @@ const UserMenu = () => {
             <AiOutlineMenu size={18} />
           </span>
           <span>
-            <Avatar />
+            <Avatar src={profile.user?.image ?? undefined} />
           </span>
         </div>
       </div>
@@ -75,10 +76,14 @@ const UserMenu = () => {
     flex-col
     cursor-pointer"
           >
-            <>
-              <MenuItem onClick={loginModal.open} label="Login" />
-              <MenuItem onClick={registerModal.open} label="Sign up" />
-            </>
+            {profile.user ? (
+              <></>
+            ) : (
+              <>
+                <MenuItem onClick={loginModal.open} label="Login" />
+                <MenuItem onClick={registerModal.open} label="Sign up" />
+              </>
+            )}
           </div>
         </div>
       )}
