@@ -15,7 +15,7 @@ import { Input } from '../ui';
 import { toast } from 'react-hot-toast';
 import { Button } from '../ui/Button';
 import { signIn } from 'next-auth/react';
-import { useLoginModal, useProfile } from '@/hooks';
+import { useLoginModal } from '@/hooks';
 
 interface RegisterFieldValues extends FieldValues {
   name: string;

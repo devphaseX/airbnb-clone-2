@@ -62,11 +62,12 @@ const Input: React.FC<InputProps> = ({
        origin-[0]
        z-10
        transition
+       -translate-y-3
        ${formatPice ? 'left-9' : 'left-4'}
-        peer-placeholder-shown:translate-y-0
-        peer-placeholder-shown:scale-100
-        peer-focus:scale-75
-        peer-focus:-translate-y-4
+       peer-placeholder-shown:translate-y-0
+       peer-placeholder-shown:scale-100
+       peer-focus:scale-75
+       peer-focus:-translate-y-4
        `}
     >
       {label}

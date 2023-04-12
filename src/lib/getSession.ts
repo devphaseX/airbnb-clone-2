@@ -6,7 +6,7 @@ import { prismaClient } from '../lib/prisma';
 async function getSession() {
   const session = await getServerSession(authOptions);
 
-  if (!(session && session.user)) return null;
+  if (!session?.user) return null;
 
   const user = await prismaClient.user.findUnique({
     where: { email: session.user.email! },

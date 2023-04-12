@@ -10,4 +10,4 @@ const envSchema = z.object({
   NEXTAUTH_SECRET: z.string(),
 } satisfies EnvBaseSchema);
 
-envSchema.parse(envSchema);
+if (typeof window === 'undefined') envSchema.parse(process.env);

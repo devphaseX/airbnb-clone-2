@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  dev-db:
+    image: postgres:15.2-alpine3.17
+    ports:
+      - 5438:5432
+    environment:
+      - POSTGRES_USER=airbnb-clone
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=airbnb-clone
+    networks:
+      - airbnb-clone
+  test-db:
+    image: postgres:15.2-alpine3.17
+    ports:
+      - 5439:5432
+    environment:
+      - POSTGRES_USER=airbnb-clone
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=airbnb-clone
+    networks:
+      - airbnb-clone
+networks:
+  airbnb-clone:
