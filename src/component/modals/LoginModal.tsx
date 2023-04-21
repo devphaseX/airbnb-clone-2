@@ -28,7 +28,7 @@ const LoginModal: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFieldValues>({
-    defaultValues: { name: '', email: '', password: '' },
+    defaultValues: { email: '', password: '' },
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const registerModal = useRegisterModal();
