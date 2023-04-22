@@ -21,90 +21,108 @@ import { Container } from './Container';
 import { CategoryBox } from './CategoryBox';
 
 interface CategoryItemData {
-  label: string;
+  label: ItemCategory;
   icon: IconType;
   description: string;
 }
 
+enum ItemCategory {
+  BEACH = 'beach',
+  WINDMILLS = 'windwills',
+  MODERN = 'modern',
+  COUNTRYSIDE = 'countryside',
+  POOLS = 'pools',
+  ISLANDS = 'islands',
+  LAKE = 'lake',
+  SKIING = 'skiing',
+  CASTLES = 'castles',
+  CAMPING = 'camping',
+  ARCTIC = 'arctic',
+  CAVE = 'cave',
+  DESERT = 'desert',
+  BARNS = 'barns',
+  LAX = 'lax',
+}
+
 const categories: Array<CategoryItemData> = [
   {
-    label: 'Beach',
+    label: ItemCategory.BEACH,
     icon: TbBeach,
     description: 'This propertu is close to the beach',
   },
   {
-    label: 'Windmills',
+    label: ItemCategory.WINDMILLS,
     icon: GiWindmill,
     description: 'This propertu is close to the beach',
   },
   {
-    label: 'Modern',
+    label: ItemCategory.MODERN,
     icon: MdOutlineVilla,
     description: 'This propertu is close to the beach',
   },
 
   {
-    label: 'Countryside',
+    label: ItemCategory.COUNTRYSIDE,
     icon: TbMountain,
     description: 'This property is in the countryside!',
   },
 
   {
-    label: 'Pools',
+    label: ItemCategory.POOLS,
     icon: TbPool,
     description: 'This property has a pool',
   },
   {
-    label: 'Islands',
+    label: ItemCategory.ISLANDS,
     icon: GiIsland,
     description: 'This property is on an island',
   },
   {
-    label: 'Lake',
+    label: ItemCategory.LAKE,
     icon: GiBoatFishing,
     description: 'This property is close to a lake',
   },
   {
-    label: 'Skiing',
+    label: ItemCategory.SKIING,
     icon: FaSkiing,
     description: 'This property has skiing activities',
   },
   {
-    label: 'Castles',
+    label: ItemCategory.CASTLES,
     icon: GiCastle,
     description: 'This property is in a castle',
   },
   {
-    label: 'Camping',
+    label: ItemCategory.CAMPING,
     icon: GiForestCamp,
     description: 'This property  has campling activitie',
   },
   {
-    label: 'Arctic',
+    label: ItemCategory.ARCTIC,
     icon: BsSnow,
     description: 'This property  has campling activitie',
   },
 
   {
-    label: 'Cave',
+    label: ItemCategory.CAVE,
     icon: GiCaveEntrance,
     description: 'This property  is in a cave',
   },
 
   {
-    label: 'Desert',
+    label: ItemCategory.DESERT,
     icon: GiCactus,
     description: 'This property is in a desert',
   },
 
   {
-    label: 'Barns',
+    label: ItemCategory.BARNS,
     icon: GiBarn,
     description: 'This property is in the barn',
   },
 
   {
-    label: 'Lax',
+    label: ItemCategory.LAX,
     icon: IoDiamond,
     description: 'This property is luxury',
   },
@@ -132,5 +150,5 @@ const Categories = () => {
   );
 };
 
-export { Categories };
+export { Categories, categories, ItemCategory };
 export type { CategoryItemData };

@@ -7,6 +7,7 @@ import { useRegisterModal } from '@/hooks/useRegisterHook';
 import { useLoginModal, useProfile } from '@/hooks';
 import { useCallback } from 'react';
 import { SafeUser } from '@/lib/getSession';
+import { useRentModal } from '@/hooks/useRentModal';
 
 interface UserMenuProps {
   currentUser: SafeUser | null;
@@ -17,10 +18,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const profile = useProfile();
+  const rentModal = useRentModal();
 
   const onRent = useCallback(() => {
     if (currentUser) return;
-    loginModal.open();
+    rentModal.open();
   }, []);
 
   return (
@@ -88,7 +90,15 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     cursor-pointer"
           >
             {profile.user ? (
-              <></>
+              <>
+                <MenuItem onClick={loginModal.open} label="My trips" />
+                <MenuItem onClick={registerModal.open} label="My favourites" />
+                <MenuItem onClick={loginModal.open} label="My reservation" />
+                <MenuItem onClick={registerModal.open} label="My properties" />
+                <MenuItem onClick={onRent} label="Airbnb my home" />
+                <hr />
+                <MenuItem onClick={registerModal.open} label="logout" />
+              </>
             ) : (
               <>
                 <MenuItem onClick={loginModal.open} label="Login" />

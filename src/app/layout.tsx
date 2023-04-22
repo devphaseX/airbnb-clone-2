@@ -1,7 +1,6 @@
 import './globals.css';
 import { Navbar } from '../component/navbar/Navbar';
-import { RegisterModal } from '../component/modals/RegisterModal';
-import { LoginModal } from '../component/modals/LoginModal';
+import { RegisterModal, LoginModal, RentModal } from '../component/modals';
 import { ToastProvider } from '../component/ui/Toaster';
 import { Categories } from '../component/ui/Categories';
 import { ProfileProvider } from '../component/ProfileProvider/ProfileProvider';
@@ -24,6 +23,7 @@ export default async function RootLayout({
           <ProfileProvider user={user as SafeUser | null}>
             <LoginModal />
             <RegisterModal />
+            <RentModal />
             <Navbar />
             <Categories />
           </ProfileProvider>
