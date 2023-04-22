@@ -1,4 +1,6 @@
+import { User } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import { NextResponse } from 'next/server';
 import { prismaClient } from '../../lib/prisma';
 
 export const POST = async (request: Request) => {
@@ -22,7 +24,11 @@ export const POST = async (request: Request) => {
     data: {
       name: data.name,
       email: data.password,
-      //   hashedPassword: bcrypt.hashSync(data.password, 10) as string,
+      hashedPassword: bcrypt.hashSync(data.password, 10),
     },
   });
+
+  delete (user as Partial<User>).hashedPassword;
+
+  return NextResponse.json(user);
 };

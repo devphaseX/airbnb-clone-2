@@ -33,7 +33,7 @@ CREATE TABLE "users" (
     "email" TEXT NOT NULL,
     "email_verified" TIMESTAMP(3),
     "image" TEXT,
-    "hashedPassword" TEXT NOT NULL,
+    "hashedPassword" TEXT,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );

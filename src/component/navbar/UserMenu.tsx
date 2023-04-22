@@ -5,18 +5,28 @@ import { Avatar } from '../ui/index';
 import { MenuItem } from './MenuItem';
 import { useRegisterModal } from '@/hooks/useRegisterHook';
 import { useLoginModal, useProfile } from '@/hooks';
+import { useCallback } from 'react';
+import { SafeUser } from '@/lib/getSession';
 
-const UserMenu = () => {
+interface UserMenuProps {
+  currentUser: SafeUser | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const profile = useProfile();
 
+  const onRent = useCallback(() => {
+    if (currentUser) return;
+    loginModal.open();
+  }, []);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-      
           className="
         hidden
         md:block
@@ -28,6 +38,7 @@ const UserMenu = () => {
       hover:bg-neutral-100
         transition
         cursor-pointer"
+          onClick={onRent}
         >
           Airbnb your home
         </div>
