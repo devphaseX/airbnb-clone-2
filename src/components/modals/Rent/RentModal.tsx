@@ -56,6 +56,7 @@ const RentModal = () => {
   const selectedBathrooms = watch('bathroomCount');
   const selectedGuestNo = watch('guestCount');
   const selectedRooms = watch('roomCount');
+  const selectedImage = watch('imageSrc');
 
   const proceedForward = formCanProceedForward(step);
   const proceedBackward = formCanProceedBackward(step);
@@ -154,7 +155,12 @@ const RentModal = () => {
             title="Add a photo of your place"
             subtitle="Show guests what your place look like!"
           />
-          <ImageUpload />
+          <ImageUpload
+            value={selectedImage}
+            onChange={(imageSrc) => {
+              setCustomValue('imageSrc', imageSrc);
+            }}
+          />
         </div>
       );
 
