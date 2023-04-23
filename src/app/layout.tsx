@@ -1,11 +1,13 @@
 import './globals.css';
-import { Navbar } from '../component/navbar/Navbar';
-import { RegisterModal, LoginModal, RentModal } from '../component/modals';
-import { ToastProvider } from '../component/ui/Toaster';
-import { Categories } from '../component/ui/Categories';
-import { ProfileProvider } from '../component/ProfileProvider/ProfileProvider';
+import { Navbar } from '../components/navbar/Navbar';
+import { LoginModal } from '../components/modals/LoginModal';
+import { RegisterModal } from '../components/modals/RegisterModal';
+import { ToastProvider } from '../components/ui/Toaster';
+import { ProfileProvider } from '../components/ProfileProvider/ProfileProvider';
 import { getSession, SafeUser } from '@/lib/getSession';
 import '../config/schema.env';
+import { Categories } from '@/components/ui/Categories';
+import { RentModal } from '@/components/modals';
 export const metadata = {};
 
 export default async function RootLayout({
@@ -13,14 +15,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getSession();
-  console.log({ user });
+  const session = await getSession();
   return (
     <html lang="en">
       <body>
         <>
           <ToastProvider />
-          <ProfileProvider user={user as SafeUser | null}>
+          <ProfileProvider user={(session?.user as SafeUser) ?? null}>
             <LoginModal />
             <RegisterModal />
             <RentModal />

@@ -15,3 +15,10 @@ body,
 :root {
   height: 100%;
 }
+
+.leaflet-bottom,
+.leaflet-control,
+.leaftlet-pane,
+.leaftlet-top {
+  z-index: 0 !important;
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import { createModalHook } from './modal';
 
 const useRentModal = createModalHook();

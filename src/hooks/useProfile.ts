@@ -1,5 +1,7 @@
+'use client';
+
 import { useContext } from 'react';
-import { ProfileContext } from '../component/ProfileProvider/ProfileProvider';
+import { ProfileContext } from '../components/ProfileProvider/ProfileProvider';
 
 const useProfile = () => {
   const profile = useContext(ProfileContext);
