@@ -3,18 +3,18 @@
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { BiDollar } from 'react-icons/bi';
 
-interface InputProps {
+interface InputProps<InputField extends FieldValues = FieldValues> {
   name: keyof FieldValues;
   label: string;
   type?: string;
   disabled?: boolean;
   required?: boolean;
   formatPice?: boolean;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<InputField>;
   errors: FieldErrors;
 }
 
-const Input: React.FC<InputProps> = ({
+const Input = <InputField extends FieldValues>({
   name,
   label,
   type,
@@ -23,7 +23,7 @@ const Input: React.FC<InputProps> = ({
   formatPice,
   register,
   errors,
-}: InputProps) => (
+}: InputProps<InputField>): React.ReactElement => (
   <div
     className="
     w-full

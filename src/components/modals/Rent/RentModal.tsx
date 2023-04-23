@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Heading } from '@/components/ui';
+import { Heading, Input } from '@/components/ui';
 import { categories } from '@/components/ui/Categories';
 import { useRentModal } from '../../../hooks/useRentModal';
 import { Modal } from '../Modal';
@@ -21,6 +21,7 @@ import { LocationMap } from '@/components/Map';
 const RentModal = () => {
   const { close, isOpen } = useRentModal();
   const [step, setStep] = useState(RentalStep.CATEGORY);
+  const [formSubmitLoading, setFormSubmitLoading] = useState(false);
   const {
     register,
     setValue,
@@ -167,7 +168,30 @@ const RentModal = () => {
       break;
     }
     case RentalStep.DESCRIPTION: {
-      bodyContent = <div></div>;
+      bodyContent = (
+        <div className="flex flex-col gap-8">
+          <Heading
+            title="How would you describe your place"
+            subtitle="Short and sweet works best"
+          />
+          <Input
+            name="title"
+            label="Title"
+            disabled={formSubmitLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+          <Input
+            name="description"
+            label="Description"
+            disabled={formSubmitLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+        </div>
+      );
 
       break;
     }
