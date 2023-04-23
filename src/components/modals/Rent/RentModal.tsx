@@ -196,7 +196,23 @@ const RentModal = () => {
       break;
     }
     case RentalStep.PRICE: {
-      bodyContent = <div></div>;
+      bodyContent = (
+        <div className="flex flex-col gap-8">
+          <Heading
+            title="Now, set your price"
+            subtitle="How much do you charge per night?"
+          />
+          <Input
+            name="price"
+            label="Price"
+            type="number"
+            formatPice
+            disabled={formSubmitLoading}
+            register={register}
+            errors={errors}
+          />
+        </div>
+      );
       break;
     }
   }
