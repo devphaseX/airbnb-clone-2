@@ -1,6 +1,6 @@
 import { getCurrentUser } from '@/action/getCurrentUser';
 import { RentalFormData } from '@/components/modals/Rent/lib';
-import { ListingSchema } from '@/data/validations/listing.schema.zod';
+import { ListingSchema } from '@/data/listing/validation/listing.schema.zod';
 import { prismaClient } from '@/lib/prisma';
 import { Request } from 'express-jwt';
 import { NextResponse } from 'next/server';

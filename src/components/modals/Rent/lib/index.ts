@@ -1,5 +1,5 @@
 import { ItemCategory } from '@/data/category/data';
-import { ClientListing } from '@/data/validations/listing.schema.zod';
+import { ClientListing } from '@/data/listing/validation/listing.schema.zod';
 import { CountrySelectValue } from '@/hooks';
 
 enum RentalStep {

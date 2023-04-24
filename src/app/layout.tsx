@@ -8,7 +8,7 @@ import { getSession, SafeUser } from '@/lib/getSession';
 import '../config/schema.env';
 import { Categories } from '@/components/ui/Categories';
 import { RentModal } from '@/components/modals';
-import '../data/validations';
+import '../data/env/validation/env.schema.zod';
 export const metadata = {};
 
 export default async function RootLayout({
