@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { type Listing } from '@prisma/client';
-import { ItemCategory } from '@/components/ui/Categories';
+import { ItemCategory } from '../category/data';
 
 type DbListingSchema = OmitServerGenData<Listing, ListServerFields>;
 const ListingSchema = z.object({

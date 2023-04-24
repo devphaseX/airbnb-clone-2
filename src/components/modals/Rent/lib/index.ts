@@ -1,4 +1,4 @@
-import { ItemCategory } from '@/components/ui/Categories';
+import { ItemCategory } from '@/data/category/data';
 import { ClientListing } from '@/data/validations/listing.schema.zod';
 import { CountrySelectValue } from '@/hooks';
 

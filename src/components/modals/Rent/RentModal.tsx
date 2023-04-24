@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Heading, Input } from '@/components/ui';
-import { categories } from '@/components/ui/Categories';
 import { useRentModal } from '../../../hooks/useRentModal';
 import { Modal } from '../Modal';
 import {
@@ -21,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
+import { categories } from '@/data/category/data';
 
 const RentModal = () => {
   const { close, isOpen } = useRentModal();
