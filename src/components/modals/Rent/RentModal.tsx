@@ -17,15 +17,21 @@ import { RentFeatureCounter } from '../../ui/input/RentFeatureCounter';
 import { ImageUpload } from '../../ui/input/ImageUpload';
 
 import { LocationMap } from '@/components/Map';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+import { useCallback } from 'react';
+import { useEffect } from 'react';
 
 const RentModal = () => {
   const { close, isOpen } = useRentModal();
   const [step, setStep] = useState(RentalStep.CATEGORY);
   const [formSubmitLoading, setFormSubmitLoading] = useState(false);
+  const router = useRouter();
   const {
     register,
     setValue,
     handleSubmit,
+    reset,
     formState: { errors },
     watch,
   } = useForm<RentalFormData>({
@@ -67,14 +73,41 @@ const RentModal = () => {
 
   const onBack = () => proceedBackward && setStep(step - 1);
   const onNext = () => proceedForward && setStep(step + 1);
-  const onSubmit: SubmitHandler<RentalFormData> = (data) => {
-    if (!proceedForward) {
-    }
+  const onSubmit: SubmitHandler<RentalFormData> = async (data) => {
+    if (proceedForward) return onNext();
 
-    return onNext();
+    setFormSubmitLoading(true);
+    try {
+      const formSubmitResponse = await fetch('/api/listing', {
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!formSubmitResponse.ok) {
+      }
+      toast.success('Listing created');
+      router.refresh();
+      resetForm();
+      close();
+    } catch (e) {
+      toast.error('Something went wrong');
+    } finally {
+      setFormSubmitLoading(false);
+    }
   };
 
   let bodyContent: React.ReactElement;
+
+  const resetForm = useCallback(() => {
+    reset();
+    setStep(RentalStep.CATEGORY);
+  }, []);
+
+  useEffect(() => {
+    return function () {
+      if (!open) reset();
+    };
+  }, [open]);
 
   switch (step) {
     case RentalStep.CATEGORY: {
