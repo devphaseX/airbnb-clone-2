@@ -1,34 +1,38 @@
-import { User } from '@prisma/client';
 import bcrypt from 'bcrypt';
+import { ZodError } from 'zod';
+import { User } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import { prismaClient } from '@/lib/prisma';
+import { UserSchema } from '@/data/validations/user.schema.zod';
 
 export const POST = async (request: Request) => {
-  const data = (await request.json()) as {
-    name?: string;
-    email?: string;
-    password?: string;
-  };
+  try {
+    const data = await UserSchema.parse(await request.json());
 
-  if (!(data.name && data.email && data.password)) {
-    throw new Error('Invalid sent data');
+    const prevUserRegister = await prismaClient.user.findUnique({
+      where: { email: data.email },
+    });
+
+    if (prevUserRegister) {
+      throw new Error('A user already exist with that email');
+    }
+
+    const user = await prismaClient.user.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        hashedPassword: bcrypt.hashSync(data.password, 10),
+      },
+    });
+
+    delete (user as Partial<User>).hashedPassword;
+
+    return NextResponse.json(user);
+  } catch (e) {
+    if (e instanceof ZodError) {
+      throw new Error(JSON.stringify(e));
+    }
+
+    throw new Error();
   }
-
-  const prevUserRegister = await prismaClient.user.findUnique({
-    where: { email: data.email },
-  });
-
-  if (prevUserRegister) throw new Error('A user already exist with that email');
-
-  const user = await prismaClient.user.create({
-    data: {
-      name: data.name,
-      email: data.password,
-      hashedPassword: bcrypt.hashSync(data.password, 10),
-    },
-  });
-
-  delete (user as Partial<User>).hashedPassword;
-
-  return NextResponse.json(user);
 };

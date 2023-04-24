@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { type Listing } from '@prisma/client';
+import { ItemCategory } from '@/components/ui/Categories';
 
 type DbListingSchema = OmitServerGenData<Listing, ListServerFields>;
 const ListingSchema = z.object({
@@ -7,7 +8,7 @@ const ListingSchema = z.object({
   description: z.string(),
   price: z.number(),
   location: z.string(),
-  category: z.string(),
+  category: z.nativeEnum(ItemCategory),
   imageSrc: z.string(),
   roomCount: z.number(),
   guestCount: z.number(),

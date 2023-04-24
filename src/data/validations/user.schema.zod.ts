@@ -5,8 +5,8 @@ const UserSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   image: z.string(),
-  passsword: z.string(),
-} satisfies MakeRecordValueTypeUnknown<DbUserSchema & { passsword: string }>);
+  password: z.string(),
+} satisfies MakeRecordValueTypeUnknown<DbUserSchema & { password: string }>);
 
 type ClientUser = z.infer<typeof UserSchema>;
 type DbUserSchema = OmitServerGenData<User, UserServerFields>;

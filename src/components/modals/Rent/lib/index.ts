@@ -1,4 +1,5 @@
 import { ItemCategory } from '@/components/ui/Categories';
+import { ClientListing } from '@/data/validations/listing.schema.zod';
 import { CountrySelectValue } from '@/hooks';
 
 enum RentalStep {
@@ -10,16 +11,9 @@ enum RentalStep {
   PRICE = 5,
 }
 
-interface RentalFormData {
+interface RentalFormData extends Omit<ClientListing, 'category' | 'location'> {
   category: ItemCategory | null;
   location: CountrySelectValue | null;
-  guestCount: number;
-  roomCount: number;
-  bathroomCount: number;
-  imageSrc: string;
-  price: number;
-  title: string;
-  description: string;
 }
 
 const formCanProceedForward = (step: RentalStep) => step < RentalStep.PRICE;
