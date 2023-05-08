@@ -14,7 +14,6 @@ import { CategoryItem } from './CatgoryItem';
 import { CountrySelect } from '../../ui/input/CountrySelect';
 import { RentFeatureCounter } from '../../ui/input/RentFeatureCounter';
 import { ImageUpload } from '../../ui/input/ImageUpload';
-
 import { LocationMap } from '@/components/Map';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';

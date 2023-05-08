@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 const Logo = () => {
   const router = useRouter();
+
   return (
     <Image
       src="/images/logo.png"
@@ -11,7 +12,9 @@ const Logo = () => {
       height="100"
       width="100"
       alt="avatar"
-      onClick={() => router.push('/')}
+      onClick={() => {
+        router.push('/');
+      }}
     />
   );
 };

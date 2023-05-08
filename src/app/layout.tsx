@@ -4,12 +4,11 @@ import { LoginModal } from '../components/modals/LoginModal';
 import { RegisterModal } from '../components/modals/RegisterModal';
 import { ToastProvider } from '../components/ui/Toaster';
 import { ProfileProvider } from '../components/ProfileProvider/ProfileProvider';
-import { getSession, SafeUser } from '@/lib/getSession';
-import '../config/schema.env';
 import { Categories } from '@/components/ui/Categories';
 import { RentModal } from '@/components/modals';
 import '../data/env/validation/env.schema.zod';
-export const metadata = {};
+import { getSession, SafeUser } from '@/action/getSession';
+export const metadata = { title: 'Airbnb' };
 
 export default async function RootLayout({
   children,
@@ -29,9 +28,36 @@ export default async function RootLayout({
             <Navbar />
             <Categories />
           </ProfileProvider>
+          <div className="pb-20 pt-28">{children}</div>
         </>
         {children}
       </body>
     </html>
+  );
+}
+
+[
+  { icon: 'https://icon.something.com/board', message: 'Something has happen' },
+  { icon: 'https://icon.something.com/board', message: 'Something has happen' },
+  { icon: 'https://icon.something.com/board', message: 'Something has happen' },
+  { icon: 'https://icon.something.com/board', message: 'Something has happen' },
+  { icon: 'https://icon.something.com/board', message: 'Something has happen' },
+].map(({ icon, message }) => <Card icon={icon} message={message} />);
+
+interface CardProps {
+  icon: string;
+  message: string;
+}
+
+function Card({ icon, message }: CardProps) {
+  return (
+    <li>
+      <div>
+        <img src={icon} alt="image" />
+      </div>
+      <div>
+        <p>{message}</p>
+      </div>
+    </li>
   );
 }

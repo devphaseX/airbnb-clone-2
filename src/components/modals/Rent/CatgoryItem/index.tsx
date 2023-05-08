@@ -1,4 +1,4 @@
-import { CategoryItemData, ItemCategory } from '@/components/ui/Categories';
+import { CategoryItemData, ItemCategory } from '@/data/category/data';
 
 interface CategoryItemProps extends CategoryItemData {
   onClick: (type: ItemCategory) => void;

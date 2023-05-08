@@ -1,9 +1,10 @@
 'use client';
 
+import { CategoryItemData } from '@/data/category/data';
+import { useQuery } from '@/hooks';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { CategoryItemData } from './Categories';
 
 interface CategoryBoxProps extends Omit<CategoryItemData, 'description'> {
   selected?: boolean;
@@ -17,19 +18,12 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   const params = useSearchParams();
   const router = useRouter();
 
+  const categoryQuery = useQuery({ queryMapFn: ({ category }) => category });
+
   const handleCategory = useCallback(() => {
+    if (categoryQuery === label) return;
     const nextParams = new URLSearchParams(params ?? {});
-    const currentCategory = nextParams.get('category');
-
-    if (
-      currentCategory &&
-      currentCategory.toLowerCase() === label.toLowerCase()
-    ) {
-      nextParams.delete('category');
-    } else {
-      nextParams.set('category', label.toString());
-    }
-
+    nextParams.set('category', label);
     router.push(`/?${nextParams.toString()}`);
   }, [params, label, router]);
 

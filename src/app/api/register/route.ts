@@ -1,4 +1,4 @@
-import { UserSchema } from '@/data/validations/user.schema.zod';
+import { UserSchema } from '@/data/user/validation/user.schema.zod';
 import bcrypt from 'bcrypt';
 import { ZodError } from 'zod';
 import { User } from '@prisma/client';

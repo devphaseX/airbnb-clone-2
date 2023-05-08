@@ -1,4 +1,7 @@
 import { createModalHook } from './modal';
 
-const useLoginModal = createModalHook();
+const useLoginModal = () => {
+  let { open, close, isOpen } = createModalHook()();
+  return { open, close, isOpen };
+};
 export { useLoginModal };

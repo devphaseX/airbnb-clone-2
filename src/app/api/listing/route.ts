@@ -1,11 +1,11 @@
+import { Request } from 'express';
 import { getCurrentUser } from '@/action/getCurrentUser';
 import { RentalFormData } from '@/components/modals/Rent/lib';
 import { ListingSchema } from '@/data/listing/validation/listing.schema.zod';
 import { prismaClient } from '@/lib/prisma';
-import { Request } from 'express-jwt';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const currentUser = await getCurrentUser();
 
@@ -23,4 +23,12 @@ export async function POST(request: Request) {
   } catch (e) {
     return NextResponse.error();
   }
+}
+
+export async function GET(req: Request) {
+  try {
+    const query = req.query;
+    const listings = prismaClient.listing.findMany();
+    return NextResponse.json(listings);
+  } catch (e) {}
 }

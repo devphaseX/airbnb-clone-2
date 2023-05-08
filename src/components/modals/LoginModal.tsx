@@ -35,7 +35,7 @@ const LoginModal: React.FC = () => {
 
   const onSubmit: SubmitHandler<LoginFieldValues> = async (data) => {
     setIsSubmitting(true);
-    const callback = await signIn('credentials', { ...data });
+    const callback = await signIn('platform-auth', { ...data });
 
     if (callback && callback.ok) {
       toast.success('Login successful');
