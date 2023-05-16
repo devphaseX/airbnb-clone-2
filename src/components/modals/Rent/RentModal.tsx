@@ -1,25 +1,25 @@
-'use client';
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { Heading, Input } from '@/components/ui';
-import { useRentModal } from '../../../hooks/useRentModal';
-import { Modal } from '../Modal';
+"use client";
+import { useMemo, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Heading, Input } from "@/components/ui";
+import { useRentModal } from "../../../hooks/useRentModal";
+import { Modal } from "../Modal";
 import {
   formCanProceedBackward,
   formCanProceedForward,
   RentalFormData,
   RentalStep,
-} from './lib';
-import { CategoryItem } from './CatgoryItem';
-import { CountrySelect } from '../../ui/input/CountrySelect';
-import { RentFeatureCounter } from '../../ui/input/RentFeatureCounter';
-import { ImageUpload } from '../../ui/input/ImageUpload';
-import { LocationMap } from '@/components/Map';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-hot-toast';
-import { useCallback } from 'react';
-import { useEffect } from 'react';
-import { categories } from '@/data/category/data';
+} from "./lib";
+import { CategoryItem } from "./CatgoryItem";
+import { CountrySelect } from "../../ui/input/CountrySelect";
+import { RentFeatureCounter } from "../../ui/input/RentFeatureCounter";
+import { ImageUpload } from "../../ui/input/ImageUpload";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { useCallback } from "react";
+import { useEffect } from "react";
+import { categories } from "@/data/category/data";
+import dynamic from "next/dynamic";
 
 const RentModal = () => {
   const { close, isOpen } = useRentModal();
@@ -36,13 +36,13 @@ const RentModal = () => {
   } = useForm<RentalFormData>({
     defaultValues: {
       category: null,
-      title: '',
-      description: '',
+      title: "",
+      description: "",
       location: null,
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
-      imageSrc: '',
+      imageSrc: "",
       price: 1,
     },
   });
@@ -57,18 +57,18 @@ const RentModal = () => {
     });
   };
 
-  const selectedCategory = watch('category');
-  const selectedLocation = watch('location');
-  const selectedBathrooms = watch('bathroomCount');
-  const selectedGuestNo = watch('guestCount');
-  const selectedRooms = watch('roomCount');
-  const selectedImage = watch('imageSrc');
+  const selectedCategory = watch("category");
+  const selectedLocation = watch("location");
+  const selectedBathrooms = watch("bathroomCount");
+  const selectedGuestNo = watch("guestCount");
+  const selectedRooms = watch("roomCount");
+  const selectedImage = watch("imageSrc");
 
   const proceedForward = formCanProceedForward(step);
   const proceedBackward = formCanProceedBackward(step);
 
-  const actionLabel = proceedForward ? 'Next' : 'Create';
-  const secondaryActionLabel = proceedBackward ? 'Back' : undefined;
+  const actionLabel = proceedForward ? "Next" : "Create";
+  const secondaryActionLabel = proceedBackward ? "Back" : undefined;
 
   const onBack = () => proceedBackward && setStep(step - 1);
   const onNext = () => proceedForward && setStep(step + 1);
@@ -77,19 +77,19 @@ const RentModal = () => {
 
     setFormSubmitLoading(true);
     try {
-      const formSubmitResponse = await fetch('/api/listing', {
-        headers: { 'content-type': 'application/json' },
+      const formSubmitResponse = await fetch("/api/listing", {
+        headers: { "content-type": "application/json" },
         body: JSON.stringify(data),
       });
 
       if (!formSubmitResponse.ok) {
       }
-      toast.success('Listing created');
+      toast.success("Listing created");
       router.refresh();
       resetForm();
       close();
     } catch (e) {
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     } finally {
       setFormSubmitLoading(false);
     }
@@ -108,6 +108,11 @@ const RentModal = () => {
     };
   }, [open]);
 
+  const Map = useMemo(
+    () => dynamic(() => import("../../Map"), { ssr: false }),
+    [selectedLocation]
+  );
+
   switch (step) {
     case RentalStep.CATEGORY: {
       bodyContent = (
@@ -122,7 +127,7 @@ const RentModal = () => {
                 <CategoryItem
                   {...category}
                   selected={selectedCategory === category.label}
-                  onClick={(category) => setCustomValue('category', category)}
+                  onClick={(category) => setCustomValue("category", category)}
                 />
               </div>
             ))}
@@ -141,9 +146,9 @@ const RentModal = () => {
           />
           <CountrySelect
             value={selectedLocation ?? undefined}
-            onChange={(value) => setCustomValue('location', value)}
+            onChange={(value) => setCustomValue("location", value)}
           />
-          <LocationMap center={selectedLocation?.latlng} />
+          <Map center={selectedLocation?.latlng} />
         </div>
       );
 
@@ -161,21 +166,21 @@ const RentModal = () => {
             subtitle="How many guests do you allow?"
             value={selectedGuestNo}
             boundary={{ min: 1, max: 10 }}
-            onChange={(value) => setCustomValue('guestCount', value)}
+            onChange={(value) => setCustomValue("guestCount", value)}
           />
           <RentFeatureCounter
             title="Rooms"
             subtitle="How many room do you have?"
             value={selectedRooms}
             boundary={{ min: 1, max: 10 }}
-            onChange={(value) => setCustomValue('roomCount', value)}
+            onChange={(value) => setCustomValue("roomCount", value)}
           />
           <RentFeatureCounter
             title="Bathrooms"
             subtitle="How many bathrooms do you have?"
             value={selectedBathrooms}
             boundary={{ min: 1, max: 10 }}
-            onChange={(value) => setCustomValue('bathroomCount', value)}
+            onChange={(value) => setCustomValue("bathroomCount", value)}
           />
         </div>
       );
@@ -191,7 +196,7 @@ const RentModal = () => {
           <ImageUpload
             value={selectedImage}
             onChange={(imageSrc) => {
-              setCustomValue('imageSrc', imageSrc);
+              setCustomValue("imageSrc", imageSrc);
             }}
           />
         </div>
