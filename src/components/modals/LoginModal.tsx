@@ -101,6 +101,8 @@ const LoginModal: React.FC = () => {
     </div>
   );
 
+  console.log({ open: loginModal.isOpen });
+
   return (
     <Modal
       isOpen={loginModal.isOpen}
