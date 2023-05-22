@@ -1,11 +1,12 @@
-'use client';
-import { useEffect, useRef } from 'react';
-import { useState } from 'react';
-import { useQuery } from '@/hooks';
-import { Listing } from '@prisma/client';
-import { useCallback } from 'react';
-import { toast } from 'react-hot-toast';
-import { ItemCategory } from '@/data/category/data';
+"use client";
+import { useEffect, useRef } from "react";
+import { useState } from "react";
+import { useQuery } from "@/hooks";
+import { Listing } from "@prisma/client";
+import { useCallback } from "react";
+import { toast } from "react-hot-toast";
+import { ItemCategory } from "@/data/category/data";
+console.log("hi");
 
 interface HomeListProps {
   listings: Array<Listing>;
@@ -25,20 +26,20 @@ const HomeList: React.FC<HomeListProps> = ({ listings: serverListings }) => {
 
     try {
       const response = await fetch(
-        `/api/listing/${_categoryQuery ? '?category=' + _categoryQuery : ''}`
+        `/api/listing/${_categoryQuery ? "?category=" + _categoryQuery : ""}`
       );
 
       if (_categoryQuery !== categoryQuery.current) return;
       if (response.ok) {
         setListings(await response.json());
       } else {
-        toast.error('Something went wrong while fetching listing');
+        toast.error("Something went wrong while fetching listing");
       }
     } catch (e) {
       if (_categoryQuery !== categoryQuery.current) return;
 
       toast.error(
-        'Something went wrong while fetching listing.This likely a network issue check your network connectivity'
+        "Something went wrong while fetching listing.This likely a network issue check your network connectivity"
       );
     }
   }, [categoryQuery.current]);

@@ -1,6 +1,6 @@
-'use client';
-import { SafeUser } from '@/action/getSession';
-import { createContext } from 'react';
+"use client";
+import type { SafeUser } from "@/action/getSession";
+import { createContext } from "react";
 
 const ProfileContext = createContext<{ user: SafeUser | null }>({ user: null });
 

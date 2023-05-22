@@ -1,14 +1,14 @@
-'use client';
-import { AiOutlineMenu } from 'react-icons/ai';
-import { useState } from 'react';
-import { Avatar } from '../ui/index';
-import { MenuItem } from './MenuItem';
-import { useRegisterModal } from '@/hooks/useRegisterHook';
-import { useLoginModal, useProfile } from '@/hooks';
-import { useCallback } from 'react';
-import { useRentModal } from '@/hooks/useRentModal';
-import { signOut } from 'next-auth/react';
-import { SafeUser } from '@/action/getSession';
+"use client";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useState } from "react";
+import { Avatar } from "../ui/index";
+import { MenuItem } from "./MenuItem";
+import { useRegisterModal } from "@/hooks/useRegisterHook";
+import { useLoginModal, useProfile } from "@/hooks";
+import { useCallback } from "react";
+import { useRentModal } from "@/hooks/useRentModal";
+import { signOut } from "next-auth/react";
+import type { SafeUser } from "@/action/getSession";
 
 interface UserMenuProps {
   currentUser: SafeUser | null;

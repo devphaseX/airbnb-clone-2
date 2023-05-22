@@ -104,9 +104,9 @@ const RentModal = () => {
 
   useEffect(() => {
     return function () {
-      if (!open) reset();
+      if (!isOpen) reset();
     };
-  }, [open]);
+  }, [isOpen]);
 
   const Map = useMemo(
     () => dynamic(() => import("../../Map"), { ssr: false }),
